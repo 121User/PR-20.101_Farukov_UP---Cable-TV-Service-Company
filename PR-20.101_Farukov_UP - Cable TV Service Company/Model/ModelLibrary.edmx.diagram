@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ca32c21987a948b4aea5d9a8fd51bcf6" Name="Diagram1">
+        <EntityTypeShape EntityType="CompanyModel.Client" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.Repair" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.Request" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.RequestStatus" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.Role" Width="1.5" PointX="1.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.ServicePackage" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.Staff" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.Wish" Width="1.5" PointX="10.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.WishStatus" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="CompanyModel.FK_Repair_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.FK_Request_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.FK_Wish_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.FK_Repair_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.FK_Request_RequestStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.FK_Staff_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.FK_Wish_WishStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.RequestPackages" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.WishPackage" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,777 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CompanyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="ClientLastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientFirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientPatronymic" Type="varchar" MaxLength="50" />
+          <Property Name="ClientPhone" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="ClientEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientPassword" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ClientBalance" Type="int" Nullable="false" />
+          <Property Name="ClientDateOfBirth" Type="date" Nullable="false" />
+          <Property Name="ClientAddress" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Repair">
+          <Key>
+            <PropertyRef Name="RepairID" />
+          </Key>
+          <Property Name="RepairID" Type="int" Nullable="false" />
+          <Property Name="IDClient" Type="int" Nullable="false" />
+          <Property Name="RepairDescription" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IDStaff" Type="int" />
+          <Property Name="RepairCost" Type="int" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="int" Nullable="false" />
+          <Property Name="IDClient" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
+          <Property Name="RequestApprovalDate" Type="datetime" />
+          <Property Name="IDRequestStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestPackages">
+          <Key>
+            <PropertyRef Name="IDRequest" />
+            <PropertyRef Name="IDSPackage" />
+          </Key>
+          <Property Name="IDRequest" Type="int" Nullable="false" />
+          <Property Name="IDSPackage" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestStatus">
+          <Key>
+            <PropertyRef Name="RequestStatusID" />
+          </Key>
+          <Property Name="RequestStatusID" Type="int" Nullable="false" />
+          <Property Name="RequestStatusName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleDescription" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="RoleSalary" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServicePackage">
+          <Key>
+            <PropertyRef Name="SPackageID" />
+          </Key>
+          <Property Name="SPackageID" Type="int" Nullable="false" />
+          <Property Name="SPackageTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SPackageDescription" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="SPackageCost" Type="int" Nullable="false" />
+          <Property Name="SPackageStartDate" Type="datetime" Nullable="false" />
+          <Property Name="SPackageEndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="int" Nullable="false" />
+          <Property Name="StaffLastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StaffFirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StaffPatronymic" Type="varchar" MaxLength="50" />
+          <Property Name="StaffPhone" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="StaffEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StaffPassword" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="StaffDateOfBirth" Type="date" Nullable="false" />
+          <Property Name="IDRole" Type="int" Nullable="false" />
+          <Property Name="StaffExperience" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Wish">
+          <Key>
+            <PropertyRef Name="WishID" />
+          </Key>
+          <Property Name="WishID" Type="int" Nullable="false" />
+          <Property Name="IDClient" Type="int" Nullable="false" />
+          <Property Name="WishDescription" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IDWishStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WishPackage">
+          <Key>
+            <PropertyRef Name="IDWish" />
+            <PropertyRef Name="IDSPackage" />
+          </Key>
+          <Property Name="IDWish" Type="int" Nullable="false" />
+          <Property Name="IDSPackage" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WishStatus">
+          <Key>
+            <PropertyRef Name="WishStatusID" />
+          </Key>
+          <Property Name="WishStatusID" Type="int" Nullable="false" />
+          <Property Name="WishStatusName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Repair_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repair_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="IDStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_RequestStatus">
+          <End Role="RequestStatus" Type="Self.RequestStatus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestStatus">
+              <PropertyRef Name="RequestStatusID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="IDRequestStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestPackages_Request">
+          <End Role="Request" Type="Self.Request" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RequestPackages" Type="Self.RequestPackages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="RequestID" />
+            </Principal>
+            <Dependent Role="RequestPackages">
+              <PropertyRef Name="IDRequest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestPackages_ServicePackage">
+          <End Role="ServicePackage" Type="Self.ServicePackage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RequestPackages" Type="Self.RequestPackages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServicePackage">
+              <PropertyRef Name="SPackageID" />
+            </Principal>
+            <Dependent Role="RequestPackages">
+              <PropertyRef Name="IDSPackage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="IDRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wish_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Wish" Type="Self.Wish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Wish">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wish_WishStatus">
+          <End Role="WishStatus" Type="Self.WishStatus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Wish" Type="Self.Wish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WishStatus">
+              <PropertyRef Name="WishStatusID" />
+            </Principal>
+            <Dependent Role="Wish">
+              <PropertyRef Name="IDWishStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WishPackage_ServicePackage">
+          <End Role="ServicePackage" Type="Self.ServicePackage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WishPackage" Type="Self.WishPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServicePackage">
+              <PropertyRef Name="SPackageID" />
+            </Principal>
+            <Dependent Role="WishPackage">
+              <PropertyRef Name="IDSPackage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WishPackage_Wish">
+          <End Role="Wish" Type="Self.Wish" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WishPackage" Type="Self.WishPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wish">
+              <PropertyRef Name="WishID" />
+            </Principal>
+            <Dependent Role="WishPackage">
+              <PropertyRef Name="IDWish" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CompanyModelContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repair" EntityType="Self.Repair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestPackages" EntityType="Self.RequestPackages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestStatus" EntityType="Self.RequestStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicePackage" EntityType="Self.ServicePackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wish" EntityType="Self.Wish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WishPackage" EntityType="Self.WishPackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WishStatus" EntityType="Self.WishStatus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Repair_Client" Association="Self.FK_Repair_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repair_Staff" Association="Self.FK_Repair_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_Client" Association="Self.FK_Request_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_RequestStatus" Association="Self.FK_Request_RequestStatus">
+            <End Role="RequestStatus" EntitySet="RequestStatus" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestPackages_Request" Association="Self.FK_RequestPackages_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="RequestPackages" EntitySet="RequestPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestPackages_ServicePackage" Association="Self.FK_RequestPackages_ServicePackage">
+            <End Role="ServicePackage" EntitySet="ServicePackage" />
+            <End Role="RequestPackages" EntitySet="RequestPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Role" Association="Self.FK_Staff_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wish_Client" Association="Self.FK_Wish_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Wish" EntitySet="Wish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wish_WishStatus" Association="Self.FK_Wish_WishStatus">
+            <End Role="WishStatus" EntitySet="WishStatus" />
+            <End Role="Wish" EntitySet="Wish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WishPackage_ServicePackage" Association="Self.FK_WishPackage_ServicePackage">
+            <End Role="ServicePackage" EntitySet="ServicePackage" />
+            <End Role="WishPackage" EntitySet="WishPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WishPackage_Wish" Association="Self.FK_WishPackage_Wish">
+            <End Role="Wish" EntitySet="Wish" />
+            <End Role="WishPackage" EntitySet="WishPackage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="ClientLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientPatronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientBalance" Type="Int32" Nullable="false" />
+          <Property Name="ClientDateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Repair" Relationship="Self.FK_Repair_Client" FromRole="Client" ToRole="Repair" />
+          <NavigationProperty Name="Request" Relationship="Self.FK_Request_Client" FromRole="Client" ToRole="Request" />
+          <NavigationProperty Name="Wish" Relationship="Self.FK_Wish_Client" FromRole="Client" ToRole="Wish" />
+        </EntityType>
+        <EntityType Name="Repair">
+          <Key>
+            <PropertyRef Name="RepairID" />
+          </Key>
+          <Property Name="RepairID" Type="Int32" Nullable="false" />
+          <Property Name="IDClient" Type="Int32" Nullable="false" />
+          <Property Name="RepairDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDStaff" Type="Int32" />
+          <Property Name="RepairCost" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Repair_Client" FromRole="Repair" ToRole="Client" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Repair_Staff" FromRole="Repair" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" />
+          <Property Name="IDClient" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RequestApprovalDate" Type="DateTime" Precision="3" />
+          <Property Name="IDRequestStatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Request_Client" FromRole="Request" ToRole="Client" />
+          <NavigationProperty Name="RequestStatus" Relationship="Self.FK_Request_RequestStatus" FromRole="Request" ToRole="RequestStatus" />
+          <NavigationProperty Name="ServicePackage" Relationship="Self.RequestPackages" FromRole="Request" ToRole="ServicePackage" />
+        </EntityType>
+        <EntityType Name="RequestStatus">
+          <Key>
+            <PropertyRef Name="RequestStatusID" />
+          </Key>
+          <Property Name="RequestStatusID" Type="Int32" Nullable="false" />
+          <Property Name="RequestStatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Request" Relationship="Self.FK_Request_RequestStatus" FromRole="RequestStatus" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleSalary" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Role" FromRole="Role" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="ServicePackage">
+          <Key>
+            <PropertyRef Name="SPackageID" />
+          </Key>
+          <Property Name="SPackageID" Type="Int32" Nullable="false" />
+          <Property Name="SPackageTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SPackageDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SPackageCost" Type="Int32" Nullable="false" />
+          <Property Name="SPackageStartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SPackageEndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Request" Relationship="Self.RequestPackages" FromRole="ServicePackage" ToRole="Request" />
+          <NavigationProperty Name="Wish" Relationship="Self.WishPackage" FromRole="ServicePackage" ToRole="Wish" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="Int32" Nullable="false" />
+          <Property Name="StaffLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StaffFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StaffPatronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StaffPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StaffEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StaffPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StaffDateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IDRole" Type="Int32" Nullable="false" />
+          <Property Name="StaffExperience" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Repair" Relationship="Self.FK_Repair_Staff" FromRole="Staff" ToRole="Repair" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Staff_Role" FromRole="Staff" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Wish">
+          <Key>
+            <PropertyRef Name="WishID" />
+          </Key>
+          <Property Name="WishID" Type="Int32" Nullable="false" />
+          <Property Name="IDClient" Type="Int32" Nullable="false" />
+          <Property Name="WishDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDWishStatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Wish_Client" FromRole="Wish" ToRole="Client" />
+          <NavigationProperty Name="WishStatus" Relationship="Self.FK_Wish_WishStatus" FromRole="Wish" ToRole="WishStatus" />
+          <NavigationProperty Name="ServicePackage" Relationship="Self.WishPackage" FromRole="Wish" ToRole="ServicePackage" />
+        </EntityType>
+        <EntityType Name="WishStatus">
+          <Key>
+            <PropertyRef Name="WishStatusID" />
+          </Key>
+          <Property Name="WishStatusID" Type="Int32" Nullable="false" />
+          <Property Name="WishStatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Wish" Relationship="Self.FK_Wish_WishStatus" FromRole="WishStatus" ToRole="Wish" />
+        </EntityType>
+        <Association Name="FK_Repair_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wish_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Wish" Type="Self.Wish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Wish">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repair_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="IDStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_RequestStatus">
+          <End Role="RequestStatus" Type="Self.RequestStatus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestStatus">
+              <PropertyRef Name="RequestStatusID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="IDRequestStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="IDRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wish_WishStatus">
+          <End Role="WishStatus" Type="Self.WishStatus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Wish" Type="Self.Wish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WishStatus">
+              <PropertyRef Name="WishStatusID" />
+            </Principal>
+            <Dependent Role="Wish">
+              <PropertyRef Name="IDWishStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RequestPackages">
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <End Role="ServicePackage" Type="Self.ServicePackage" Multiplicity="*" />
+        </Association>
+        <Association Name="WishPackage">
+          <End Role="ServicePackage" Type="Self.ServicePackage" Multiplicity="*" />
+          <End Role="Wish" Type="Self.Wish" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="CompanyBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Repair" EntityType="Self.Repair" />
+          <EntitySet Name="Request" EntityType="Self.Request" />
+          <EntitySet Name="RequestStatus" EntityType="Self.RequestStatus" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="ServicePackage" EntityType="Self.ServicePackage" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Wish" EntityType="Self.Wish" />
+          <EntitySet Name="WishStatus" EntityType="Self.WishStatus" />
+          <AssociationSet Name="FK_Repair_Client" Association="Self.FK_Repair_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_Client" Association="Self.FK_Request_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wish_Client" Association="Self.FK_Wish_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Wish" EntitySet="Wish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repair_Staff" Association="Self.FK_Repair_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_RequestStatus" Association="Self.FK_Request_RequestStatus">
+            <End Role="RequestStatus" EntitySet="RequestStatus" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Role" Association="Self.FK_Staff_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wish_WishStatus" Association="Self.FK_Wish_WishStatus">
+            <End Role="WishStatus" EntitySet="WishStatus" />
+            <End Role="Wish" EntitySet="Wish" />
+          </AssociationSet>
+          <AssociationSet Name="RequestPackages" Association="Self.RequestPackages">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="ServicePackage" EntitySet="ServicePackage" />
+          </AssociationSet>
+          <AssociationSet Name="WishPackage" Association="Self.WishPackage">
+            <End Role="ServicePackage" EntitySet="ServicePackage" />
+            <End Role="Wish" EntitySet="Wish" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CompanyModelContainer" CdmEntityContainer="CompanyBaseEntities">
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="CompanyModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ClientLastName" ColumnName="ClientLastName" />
+                <ScalarProperty Name="ClientFirstName" ColumnName="ClientFirstName" />
+                <ScalarProperty Name="ClientPatronymic" ColumnName="ClientPatronymic" />
+                <ScalarProperty Name="ClientPhone" ColumnName="ClientPhone" />
+                <ScalarProperty Name="ClientEmail" ColumnName="ClientEmail" />
+                <ScalarProperty Name="ClientPassword" ColumnName="ClientPassword" />
+                <ScalarProperty Name="ClientBalance" ColumnName="ClientBalance" />
+                <ScalarProperty Name="ClientDateOfBirth" ColumnName="ClientDateOfBirth" />
+                <ScalarProperty Name="ClientAddress" ColumnName="ClientAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repair">
+            <EntityTypeMapping TypeName="CompanyModel.Repair">
+              <MappingFragment StoreEntitySet="Repair">
+                <ScalarProperty Name="RepairID" ColumnName="RepairID" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="RepairDescription" ColumnName="RepairDescription" />
+                <ScalarProperty Name="IDStaff" ColumnName="IDStaff" />
+                <ScalarProperty Name="RepairCost" ColumnName="RepairCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Request">
+            <EntityTypeMapping TypeName="CompanyModel.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="RequestApprovalDate" ColumnName="RequestApprovalDate" />
+                <ScalarProperty Name="IDRequestStatus" ColumnName="IDRequestStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestStatus">
+            <EntityTypeMapping TypeName="CompanyModel.RequestStatus">
+              <MappingFragment StoreEntitySet="RequestStatus">
+                <ScalarProperty Name="RequestStatusID" ColumnName="RequestStatusID" />
+                <ScalarProperty Name="RequestStatusName" ColumnName="RequestStatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="CompanyModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="RoleSalary" ColumnName="RoleSalary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicePackage">
+            <EntityTypeMapping TypeName="CompanyModel.ServicePackage">
+              <MappingFragment StoreEntitySet="ServicePackage">
+                <ScalarProperty Name="SPackageID" ColumnName="SPackageID" />
+                <ScalarProperty Name="SPackageTitle" ColumnName="SPackageTitle" />
+                <ScalarProperty Name="SPackageDescription" ColumnName="SPackageDescription" />
+                <ScalarProperty Name="SPackageCost" ColumnName="SPackageCost" />
+                <ScalarProperty Name="SPackageStartDate" ColumnName="SPackageStartDate" />
+                <ScalarProperty Name="SPackageEndDate" ColumnName="SPackageEndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="CompanyModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+                <ScalarProperty Name="StaffLastName" ColumnName="StaffLastName" />
+                <ScalarProperty Name="StaffFirstName" ColumnName="StaffFirstName" />
+                <ScalarProperty Name="StaffPatronymic" ColumnName="StaffPatronymic" />
+                <ScalarProperty Name="StaffPhone" ColumnName="StaffPhone" />
+                <ScalarProperty Name="StaffEmail" ColumnName="StaffEmail" />
+                <ScalarProperty Name="StaffPassword" ColumnName="StaffPassword" />
+                <ScalarProperty Name="StaffDateOfBirth" ColumnName="StaffDateOfBirth" />
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="StaffExperience" ColumnName="StaffExperience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CompanyModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wish">
+            <EntityTypeMapping TypeName="CompanyModel.Wish">
+              <MappingFragment StoreEntitySet="Wish">
+                <ScalarProperty Name="WishID" ColumnName="WishID" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="WishDescription" ColumnName="WishDescription" />
+                <ScalarProperty Name="IDWishStatus" ColumnName="IDWishStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WishStatus">
+            <EntityTypeMapping TypeName="CompanyModel.WishStatus">
+              <MappingFragment StoreEntitySet="WishStatus">
+                <ScalarProperty Name="WishStatusID" ColumnName="WishStatusID" />
+                <ScalarProperty Name="WishStatusName" ColumnName="WishStatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RequestPackages" TypeName="CompanyModel.RequestPackages" StoreEntitySet="RequestPackages">
+            <EndProperty Name="Request">
+              <ScalarProperty Name="RequestID" ColumnName="IDRequest" />
+            </EndProperty>
+            <EndProperty Name="ServicePackage">
+              <ScalarProperty Name="SPackageID" ColumnName="IDSPackage" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="WishPackage" TypeName="CompanyModel.WishPackage" StoreEntitySet="WishPackage">
+            <EndProperty Name="ServicePackage">
+              <ScalarProperty Name="SPackageID" ColumnName="IDSPackage" />
+            </EndProperty>
+            <EndProperty Name="Wish">
+              <ScalarProperty Name="WishID" ColumnName="IDWish" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
